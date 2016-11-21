@@ -1,0 +1,31 @@
+{
+  "name": "ws-rate-limit",
+  "description": "Rate limiting utility for `ws`",
+  "version": "0.0.0",
+  "homepage": "https://github.com/jamen/ws-rate-limit",
+  "author": "Jamen Marz (https://git.io/jamen)",
+  "repository": "jamen/ws-rate-limit",
+  "bugs": {
+    "url": "https://github.com/jamen/ws-rate-limit/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "eslint '**/*.js' && tape 'test/*.js' | tap-spec"
+  },
+  "keywords": [
+    "limit",
+    "rate",
+    "ws",
+    "websocket"
+  ],
+  "dependencies": {
+    "css-duration": "^0.2.0"
+  }
+}
