@@ -2,7 +2,7 @@
 
 > Rate limiting utility for `ws`
 
-This rate limits the `'message'` event on [`ws`](https://npmjs.com/ws) objects.  Also triggers an additional `'limited'` event for handling.
+Rate limits the `'message'` event on [`ws`](https://npmjs.com/ws) objects and triggers `'limited'` event for handling
 
 ```js
 // Initialize module at 100 requests per 10 seconds:
@@ -16,12 +16,12 @@ wss.on('connection', function (ws) {
   // Listen for messages normally
   ws.on('message', data => ...)
 
-  // Triggered instead of 'message' when requests maxed in time frame.
+  // Triggered instead of 'message' when requests maxed in time frame
   ws.on('limited', data => ...)
 })
 ```
 
-This can also be used with [`uws`](https://npmjs.com/uws) because they are compatible.
+Can be used with [`uws`](https://npmjs.com/uws)
 
 ## Installation
 
@@ -33,12 +33,12 @@ npm install --save ws-rate-limit
 
 ### `rateLimit(rate, max) -> limiter`
 
-Creates a `limiter` function with your specified rate limiting options.  Used to easily reapply same settings on multiple connections.
+Creates a `limiter` function with your specified rate limiting options for easily reapplying settings on multiple connections
 
 #### Parameters
 
- - `rate` (`String`): A [`css-duration`](https://npmjs.com/css-duration) string of the rate. (i.e. `10m`, `0.5d`, `1w`, etc.)
- - `max` (`Number`): Maximum amount of requests that can be made during the rate.
+ - `rate` (`String`): A [`css-duration`](https://npmjs.com/css-duration) string of the rate (i.e. `10m`, `0.5d`, `1w`, etc.)
+ - `max` (`Number`): Maximum amount of requests that can be made during the rate
 
 #### Example
 
@@ -52,13 +52,13 @@ var limiter = rateLimit('.5d', 5000)
 
 ### `limiter(client)`
 
-Apply rate limiting options on a `ws` client.
+Apply rate limiting options on `ws` client
 
-**Note:** This will unset your `'message'` event handlers in order to create a new rate limited one wrapping it.  Try using `'newListener'` event to cache for unsetting yourself.
+**Note:** This will unset your `'message'` event handlers in order to create a new rate limited one wrapping it. Use `'newListener'` event to cache for unsetting.
 
 #### Parameters
 
- - `client` ([`WebSocket`](https://npmjs.com/ws)): A `ws` websocket client to apply rate limits.
+ - `client` ([`WebSocket`](https://npmjs.com/ws)): A `ws` websocket client to apply rate limits
 
 #### Example
 
@@ -72,7 +72,7 @@ wss.on('connection', function (client) {
 
 ### Event `'limited'`
 
-Event is triggered instead of `'message'` when the rate limiting has capped in the time frame.
+Event is triggered instead of `'message'` when the rate limiting has capped in the time frame
 
 #### Example
 
@@ -82,7 +82,7 @@ wss.on('connection', function (client) {
   limiter(client)
 
   client.on('limited', function (data) {
-    // Respond with rate limit error.
+    // Respond with rate limit error
     client.send('No!')
   })
 })
