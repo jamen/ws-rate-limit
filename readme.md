@@ -6,7 +6,7 @@ Rate limits the `'message'` event on [`ws`](https://npmjs.com/ws) objects and tr
 
 ```js
 // Initialize module at 100 requests per 10 seconds:
-var rateLimit = require('ws-rate-limit')(100, '10s')
+var rateLimit = require('ws-rate-limit')('10s', 100)
 
 // Handle connections on WS server
 wss.on('connection', function (ws) {
