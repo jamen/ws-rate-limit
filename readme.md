@@ -54,8 +54,6 @@ var limiter = rateLimit('.5d', 5000)
 
 Apply rate limiting options on `ws` client
 
-**Note:** This will unset your `'message'` event handlers in order to create a new rate limited one wrapping it. Use `'newListener'` event to cache for unsetting.
-
 #### Parameters
 
  - `client` ([`WebSocket`](https://npmjs.com/ws)): A `ws` websocket client to apply rate limits
@@ -72,7 +70,9 @@ wss.on('connection', function (client) {
 
 ### Event `'limited'`
 
-Event is triggered instead of `'message'` when the rate limiting has capped in the time frame
+Event is triggered instead of `'message'` when the rate limiting has capped in the time frame.
+
+The parameters are `(message, count, flags)` where `count` is an number of how many rate limited requests the user has made, and `message` and `flags` come from `'message'` event.
 
 #### Example
 
@@ -81,9 +81,10 @@ wss.on('connection', function (client) {
   // Apply limiting
   limiter(client)
 
-  client.on('limited', function (data) {
+  client.on('limited', function (data, count) {
     // Respond with rate limit error
     client.send('No!')
+    if (count > 10) client.close()
   })
 })
 ```  

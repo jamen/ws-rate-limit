@@ -26,6 +26,11 @@
     "websocket"
   ],
   "dependencies": {
-    "css-duration": "^0.2.0"
+    "css-duration": "^0.2.0",
+    "event-intercept": "^0.2.1"
+  },
+  "devDependencies": {
+    "uws": "^0.11.1",
+    "ws": "^1.1.1"
   }
 }
