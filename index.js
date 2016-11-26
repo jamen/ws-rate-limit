@@ -30,11 +30,11 @@ function rateLimit (rate, max) {
     client.messageCount = 0
 
     intercept(client, 'message', function (data, done) {
-      if (client.messageCount++ < max) done(null, data)
-      else {
-        client.emit('limited', data[0], client.messageCount - max, data[1])
-        done(true)
-      }
+      // Below rate limit threshold:
+      if (client.messageCount++ < max) return done(null, data)
+      // Above threshold:
+      client.emit('limited', data[0], client.messageCount - max, data[1])
+      done(true)
     })
 
     // Push on clients array, and add handler to remove from array:
